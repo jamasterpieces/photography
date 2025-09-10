@@ -1,1 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Album 1</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+  <style>
+    .grid { display:grid; gap:.75rem; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); }
+    .grid a { display:block; border:1px solid #ddd; border-radius:10px; padding:.5rem; }
+    .grid img { display:block; width:100%; height:auto; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Album 1</h1>
+    <div id="grid" class="grid"></div>
+    <p><a href="../../">← Back to Galleries</a></p>
+  </main>
+
+  <script>
+    const USER  = "<YOUR_USER>";       // <-- your GitHub username
+    const ALBUM = "album1";            // <-- folder name under originals/ and docs/albums/
+    const files = [
+      // List the filenames exactly as they appear (case-sensitive)
+      // Examples:
+      "IMG_0001.jpg",
+      "IMG_0002.jpg",
+      // Add the rest...
+    ];
+
+    const rawBase = `https://raw.githubusercontent.com/${USER}/photography/main/originals/${ALBUM}/`;
+    const grid = document.getElementById("grid");
+
+    files.forEach(f => {
+      const a = document.createElement("a");
+      a.href = rawBase + f;
+      a.target = "_blank";
+      a.rel = "noopener";
+
+      const img = document.createElement("img");
+      img.src = `images/${f}`;
+      img.loading = "lazy";
+      img.alt = f.replace(/\.[^.]+$/, "");
+
+      a.appendChild(img);
+      grid.appendChild(a);
+    });
+  </script>
+</body>
+</html>
 
