@@ -182,15 +182,6 @@ body {
   </div>
 
   <script>
-    // Simple password protection
-    const correctPassword = "turtle";
-    const enteredPassword = prompt("Please enter the gallery password:");
-    if (enteredPassword !== correctPassword) {
-      alert("Incorrect password. Access denied.");
-      document.body.innerHTML = "<h2 style='text-align:center; margin-top: 100px;'>Access Denied</h2>";
-      throw new Error("Unauthorized access");
-    }
-
      // Detect album folder (e.g. album8) from URL
   const currentPath = window.location.pathname;
   const albumFolder = currentPath.split("/").slice(-2, -1)[0];
@@ -228,15 +219,6 @@ body {
   const overlayImg = document.getElementById("overlayImg");
   const closeBtn = document.getElementById("closeBtn");
   const downloadLink = document.getElementById("downloadLink");
-
-  gallery.addEventListener("click", (e) => {
-    if (e.target.tagName === "IMG") {
-      overlay.style.display = "flex";
-      overlayImg.src = e.target.dataset.fullres;
-      overlayImg.alt = e.target.alt;
-      downloadLink.href = e.target.dataset.fullres;
-    }
-  });
 
   closeBtn.addEventListener("click", () => {
     overlay.style.display = "none";
