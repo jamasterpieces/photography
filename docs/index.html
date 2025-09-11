@@ -446,6 +446,74 @@ PLEASE NOTE: Prices are subject to additional travel cost outside of CSRA.</cent
 <script type="text/javascript" src="source/js/myscript.js"></script> 
 <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.1.11.js"></script>
 <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+<!-- Maintenance Modal (drop-in) -->
+<style>
+  :root { --modal-bg:#fff; --modal-fg:#111; --modal-shadow:0 10px 30px rgba(0,0,0,.2); }
+  #maint-backdrop{ position:fixed; inset:0; background:#0008; backdrop-filter:saturate(120%) blur(2px); }
+  #maint-modal{ position:fixed; inset:0; display:grid; place-items:center; }
+  #maint-modal[hidden], #maint-backdrop[hidden]{ display:none; }
+  #maint-modal .modal-card{ background:var(--modal-bg); color:var(--modal-fg); width:min(520px,92vw); padding:1.1rem 1.25rem; border-radius:14px; box-shadow:var(--modal-shadow); }
+  #maint-modal h2{ margin:0 0 .5rem; font:600 1.15rem system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
+  #maint-modal p{ margin:0 0 1rem; line-height:1.5; }
+  #maint-actions{ display:flex; justify-content:flex-end; gap:.5rem; }
+  .btn{ appearance:none; border:0; border-radius:10px; padding:.6rem 1rem; font-weight:600; cursor:pointer; }
+  .btn-ok{ background:#111; color:#fff; }
+  .btn-ok:hover{ opacity:.92; }
+</style>
 
+<div id="maint-backdrop" hidden></div>
+<div id="maint-modal" role="dialog" aria-modal="true" aria-labelledby="maint-title" aria-describedby="maint-desc" hidden>
+  <div class="modal-card">
+    <h2 id="maint-title">Heads up — site maintenance</h2>
+    <p id="maint-desc">We’re tidying up a few things. Some pages may shift while we work diligently to get the galleries back up and running. Thanks for your patience.</p>
+    <div id="maint-actions">
+      <button id="maint-ok" type="button" class="btn btn-ok" aria-label="Close this message">OK</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // Set to true to show only once per tab session:
+  const SHOW_ONCE_PER_SESSION = false;
+
+  const modal    = document.getElementById('maint-modal');
+  const backdrop = document.getElementById('maint-backdrop');
+  const okBtn    = document.getElementById('maint-ok');
+  const body     = document.body;
+
+  function openModal() {
+    if (SHOW_ONCE_PER_SESSION && sessionStorage.getItem('maintOk')) return;
+    backdrop.hidden = false;
+    modal.hidden = false;
+    body.style.overflow = 'hidden';
+    okBtn.focus();
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('focus', trapFocus, true);
+  }
+
+  function closeModal() {
+    backdrop.hidden = true;
+    modal.hidden = true;
+    body.style.overflow = '';
+    document.removeEventListener('keydown', onKey);
+    document.removeEventListener('focus', trapFocus, true);
+    if (SHOW_ONCE_PER_SESSION) sessionStorage.setItem('maintOk','1');
+  }
+
+  function onKey(e){ if (e.key === 'Escape') closeModal(); }
+  function trapFocus(e){
+    if (!modal.hidden && !modal.contains(e.target)) {
+      e.stopPropagation();
+      okBtn.focus();
+    }
+  }
+
+  okBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  window.addEventListener('load', openModal);
+})();
+</script>
+<!-- /Maintenance Modal -->
 	</body>
 </html>
