@@ -1,0 +1,479 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Jonathan's Studio</title>
+	<meta name="description" content="Photo gallery">
+	<meta name="author" content="Jonathan Escobedo">
+	<meta name="keywords" content="photography gallery, portraits, landscapes, weddings, engagements, J and A Masterpieces, photo art">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="source/bootstrap-3.3.6-dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="source/font-awesome-4.5.0/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="style/slider.css">
+	<link rel="stylesheet" type="text/css" href="style/mystyle.css">
+	<link rel="icon" type="image/png" href="image/icon.png">
+<style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111821;
+      --ink: #e8f0f7;
+      --muted: #9fb2c6;
+      --brand: #6cc0ff;
+      --accent: #b0f3c2;
+      --busy: #ff9da1;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 1200px at 10% 10%, #0f1622, #090c11 60%), var(--bg);
+      color: var(--ink);
+      min-height: 100vh; display: grid; place-items: center; padding: 24px;
+    }
+    .wrap { width: 100%; max-width: 980px; display: grid; gap: 20px; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.07); border-radius: var(--radius); box-shadow: var(--shadow); }
+    header.card { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; position: sticky; top: 12px; backdrop-filter: blur(8px); }
+    h1 { font-size: clamp(20px, 2.5vw, 28px); margin: 0; letter-spacing: .3px; }
+    .subtitle { color: var(--muted); font-size: 14px; }
+
+    .calendar.card { padding: 18px; }
+    .cal-head { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 8px 6px 16px; }
+    .month-nav { display: inline-flex; align-items: center; gap: 10px; }
+    .btn { background: #0f1722; color: var(--ink); border: 1px solid rgba(255,255,255,.08); padding: 10px 12px; border-radius: 12px; cursor: pointer; font-weight: 600; letter-spacing: .2px; }
+    .btn:hover { border-color: rgba(255,255,255,.18); }
+
+    .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .dow { color: var(--muted); font-size: 12px; text-align: center; padding: 6px 0; }
+
+    .day {
+      position: relative; aspect-ratio: 1/1; border-radius: 14px; display: grid; place-items: center;
+      background: #0d131c; border: 1px solid rgba(255,255,255,.06);
+      user-select: none; cursor: pointer; isolation: isolate;
+    }
+    .day:hover { border-color: rgba(255,255,255,.2); }
+    .day .num { font-weight: 700; }
+    .day.muted { color: #6e7e90; opacity: .65; }
+    .day.today { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .day.booked { background: linear-gradient(145deg, rgba(255, 100, 110, .2), rgba(255, 100, 110, .08)); border-color: rgba(255, 160, 165, .45); }
+    .day.unavailable { opacity: .5; cursor: not-allowed; }
+    .badge { position: absolute; bottom: 6px; right: 8px; font-size: 10px; padding: 2px 6px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); color: var(--muted); }
+    .day.booked .badge { background: rgba(255, 90, 100, .2); color: #ffd6d8; border-color: rgba(255,255,255,.2); }
+
+    .legend { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+    .dot.free { background: var(--accent); }
+    .dot.busy { background: var(--busy); }
+    .dot.today { background: var(--brand); }
+
+    .request.card { padding: 16px; display: grid; gap: 10px; }
+    .request h2 { margin: 0; font-size: 18px; }
+    .req-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: grid; gap: 6px; }
+    label { font-size: 12px; color: var(--muted); }
+    input, textarea, select { background: #0b1018; color: var(--ink); border-radius: 10px; border: 1px solid rgba(255,255,255,.08); padding: 10px 12px; }
+    textarea { min-height: 80px; resize: vertical; }
+    .cta { margin-top: 6px; display: flex; gap: 10px; }
+    .cta .btn.primary { background: linear-gradient(180deg, #58b6ff, #3399ff); border-color: rgba(0,0,0,.15); color: #0a0e12; }
+    .cta .btn.ghost { background: transparent; }
+    .hint { font-size: 12px; color: var(--muted); }
+    .pill { border: 1px dashed rgba(255,255,255,.15); padding: 8px 10px; border-radius: 999px; font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 720px) {
+      .req-row { grid-template-columns: 1fr; }
+      .grid { gap: 6px; }
+    }
+  </style>
+	</head>
+<body>
+<!-- Header -->
+<div class="allcontain">
+	<!-- Navbar Up -->
+	<nav class="topnavbar navbar-default topnav">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed toggle-costume" data-toggle="collapse" data-target="#upmenu" aria-expanded="false">
+					<span class="sr-only"> Toggle navigaion</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand logo" href="#"><img src="image/logo1.png" alt="logo" width="200px"></a>
+			</div>	 
+		</div>
+		<div class="collapse navbar-collapse" id="upmenu">
+			<ul class="nav navbar-nav" id="navbarontop">
+				<li class="active"><a href="index.html">HOME</a> </li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIES <span class="caret"></span></a>
+					<ul class="dropdown-menu dropdowncostume">
+						<li><a href="products.html">Products</a></li>
+						<li><a href="services.html">Services</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="about.html">ABOUT</a>
+ 
+				</li>
+				<li>
+					<a href="contact.html">CONTACT</a>
+ 				</li>
+				<li>
+					<a href="photography.html">PHOTOGRAPHY</a>
+ 				</li>
+				</ul>
+		</div>
+	</nav>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  <div class="wrap">
+    <header class="card">
+      <div>
+        <h1>Book a Session</h1>
+        <div class="subtitle">Check availability and request your date with J &amp; A Masterpieces</div>
+      </div>
+      <button class="btn" id="exportICS">Export .ics</button>
+    </header>
+
+    <section class="calendar card" aria-label="Availability calendar">
+      <div class="cal-head">
+        <div class="legend">
+          <span><i class="dot free"></i> Available</span>
+          <span><i class="dot busy"></i> Booked</span>
+          <span><i class="dot today"></i> Today</span>
+        </div>
+        <div class="month-nav">
+          <button class="btn" id="prevMonth" aria-label="Previous month">◀</button>
+          <div id="monthLabel" aria-live="polite"></div>
+          <button class="btn" id="nextMonth" aria-label="Next month">▶</button>
+        </div>
+      </div>
+      <div class="grid" id="dow"></div>
+      <div class="grid" id="days"></div>
+    </section>
+
+    <section class="request card" aria-label="Request form">
+      <h2 id="requestTitle">Select a date to request a session</h2>
+      <div class="hint">We’ll confirm availability by email or text. Selecting a date does not guarantee a booking.</div>
+      <div class="req-row">
+        <div class="field">
+          <label for="reqDate">Requested Date</label>
+          <input id="reqDate" type="text" readonly placeholder="—" />
+        </div>
+        <div class="field">
+          <label for="reqTime">Preferred Time</label>
+          <select id="reqTime">
+            <option value="">Any</option>
+            <option>Morning</option>
+            <option>Afternoon</option>
+            <option>Golden Hour</option>
+            <option>Evening</option>
+          </select>
+        </div>
+      </div>
+      <div class="req-row">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" placeholder="Your full name" />
+        </div>
+        <div class="field">
+          <label for="contact">Email or Phone</label>
+          <input id="contact" placeholder="you@example.com or (555) 123‑4567" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="notes">Notes</label>
+        <textarea id="notes" placeholder="Tell us about the session (senior portraits, family, location ideas, etc.)"></textarea>
+      </div>
+      <div class="cta">
+        <button class="btn primary" id="sendBtn">Send Request</button>
+        <button class="btn ghost" id="clearBtn">Clear</button>
+        <span class="pill" id="status">—</span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ====== CONFIG ======
+    // Mark fully booked dates here (YYYY-MM-DD). You can populate this from your CMS or a Google Sheet later.
+    const BOOKED = new Set(['2025-10-11'
+      // Example: '2025-08-23', '2025-08-30'
+    ]);
+
+    // Optional: mark days you never shoot (0=Sunday ... 6=Saturday). Example: no Mondays.
+    const WEEKLY_UNAVAILABLE = new Set([]); // e.g., new Set([1])
+
+    // Optional: blackout date range (e.g., vacation). Inclusive.
+    const BLACKOUTS = [{start: '2025-11-27', end: '2025-11-28'}, {start: '2025-12-23', end: '2025-12-28'}
+      // { start: '2025-12-24', end: '2025-12-26' }
+    ];
+
+    // Earliest and latest month visible (relative to today)
+    const MIN_MONTH_OFFSET = -0; // show current month back N months
+    const MAX_MONTH_OFFSET = 11; // show one year ahead
+
+    // Your booking email (used for mailto link)
+    const BOOK_EMAIL = 'jamasterpieces@gmail.com';
+
+    // ====== UTILITIES ======
+    const pad = n => String(n).padStart(2, '0');
+    const fmt = (y, m, d) => `${y}-${pad(m)}-${pad(d)}`;
+
+    const parse = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+    const inRange = (date, start, end) => date >= parse(start) && date <= parse(end);
+
+    function isBlackout(date) {
+      return BLACKOUTS.some(r => inRange(date, r.start, r.end));
+    }
+
+    function isBooked(dateStr) { return BOOKED.has(dateStr); }
+
+    function isUnavailable(date) {
+      return WEEKLY_UNAVAILABLE.has(date.getDay()) || isBlackout(date);
+    }
+
+    // ====== RENDERING ======
+    const today = new Date();
+    let view = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    const monthLabel = document.getElementById('monthLabel');
+    const dowEl = document.getElementById('dow');
+    const daysEl = document.getElementById('days');
+
+    const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+    function renderDow() {
+      dowEl.innerHTML = '';
+      for (const d of DOW) {
+        const el = document.createElement('div');
+        el.className = 'dow';
+        el.textContent = d;
+        dowEl.appendChild(el);
+      }
+    }
+
+    function render() {
+      const y = view.getFullYear();
+      const m = view.getMonth();
+      const first = new Date(y, m, 1);
+      const startDay = first.getDay();
+      const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+      monthLabel.textContent = view.toLocaleString(undefined, { month: 'long', year: 'numeric' });
+      daysEl.innerHTML = '';
+
+      // Leading days from previous month
+      const prevMonthDays = new Date(y, m, 0).getDate();
+      for (let i = 0; i < startDay; i++) {
+        const num = prevMonthDays - (startDay - 1 - i);
+        const d = new Date(y, m - 1, num);
+        const cell = makeDayCell(d, true);
+        daysEl.appendChild(cell);
+      }
+
+      // Current month days
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(y, m, d);
+        const cell = makeDayCell(date, false);
+        daysEl.appendChild(cell);
+      }
+
+      // Trailing cells to complete grid (up to 42 cells)
+      const total = daysEl.children.length;
+      for (let i = total; i < 42; i++) {
+        const d = new Date(y, m + 1, i - total + 1);
+        const cell = makeDayCell(d, true);
+        daysEl.appendChild(cell);
+      }
+
+      // Limit navigation
+      updateNavBounds();
+    }
+
+    function makeDayCell(date, muted) {
+      const y = date.getFullYear();
+      const m = date.getMonth() + 1;
+      const d = date.getDate();
+      const key = fmt(y, m, d);
+
+      const el = document.createElement('button');
+      el.className = 'day' + (muted ? ' muted' : '');
+      el.setAttribute('data-date', key);
+      el.innerHTML = `<span class="num">${d}</span>`;
+
+      const isToday = sameDate(date, today);
+      const booked = isBooked(key);
+      const unavailable = isUnavailable(date);
+
+      if (isToday) el.classList.add('today');
+      if (booked) {
+        el.classList.add('booked');
+        el.insertAdjacentHTML('beforeend', '<span class="badge">Booked</span>');
+      }
+      if (unavailable) {
+        el.classList.add('unavailable');
+        el.insertAdjacentHTML('beforeend', '<span class="badge">N/A</span>');
+      }
+
+      el.addEventListener('click', () => onSelectDate(date, booked || unavailable));
+      return el;
+    }
+
+    function sameDate(a, b) { return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+
+    // ====== NAV ======
+    document.getElementById('prevMonth').addEventListener('click', () => shiftMonth(-1));
+    document.getElementById('nextMonth').addEventListener('click', () => shiftMonth(1));
+
+    function shiftMonth(delta) {
+      view.setMonth(view.getMonth() + delta);
+      render();
+    }
+
+    function updateNavBounds() {
+      const min = new Date(today.getFullYear(), today.getMonth() + MIN_MONTH_OFFSET, 1);
+      const max = new Date(today.getFullYear(), today.getMonth() + MAX_MONTH_OFFSET, 1);
+      document.getElementById('prevMonth').disabled = view <= min;
+      document.getElementById('nextMonth').disabled = view >= max;
+    }
+
+    // ====== FORM & MAILTO ======
+    const reqDate = document.getElementById('reqDate');
+    const status = document.getElementById('status');
+
+    function onSelectDate(date, locked) {
+      const nice = date.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      reqDate.value = nice;
+      document.getElementById('requestTitle').textContent = locked ? 'Date is not available' : 'Request this date';
+      status.textContent = locked ? 'That date is unavailable. Please choose another.' : 'Ready to send your request.';
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const dateText = reqDate.value.trim();
+      if (!dateText) { status.textContent = 'Pick a date first.'; return; }
+      const name = document.getElementById('name').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const time = document.getElementById('reqTime').value;
+      const notes = document.getElementById('notes').value.trim();
+
+      const subject = encodeURIComponent(`Session Request: ${dateText}${time ? ' ('+time+')' : ''}`);
+      const body = encodeURIComponent([
+        `Name: ${name || '—'}`,
+        `Contact: ${contact || '—'}`,
+        `Preferred Time: ${time || 'Any'}`,
+        `Requested Date: ${dateText}`,
+        '',
+        notes || '—'
+      ].join('\n'));
+
+      window.location.href = `mailto:${BOOK_EMAIL}?subject=${subject}&body=${body}`;
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      reqDate.value = '';
+      document.getElementById('name').value = '';
+      document.getElementById('contact').value = '';
+      document.getElementById('notes').value = '';
+      status.textContent = '—';
+      document.getElementById('requestTitle').textContent = 'Select a date to request a session';
+    });
+
+    // ====== ICS EXPORT (simple all-day events for booked dates) ======
+    document.getElementById('exportICS').addEventListener('click', () => {
+      if (BOOKED.size === 0) { status.textContent = 'No booked dates to export yet.'; return; }
+      const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//J & A Masterpieces//Availability//EN'
+      ];
+      for (const dateStr of BOOKED) {
+        const d = parse(dateStr);
+        const y = d.getFullYear(), m = pad(d.getMonth()+1), day = pad(d.getDate());
+        // All-day event (local time)
+        lines.push(
+          'BEGIN:VEVENT',
+          `UID:${dateStr}@jamasterpieces.com`,
+          `DTSTAMP:${y}${m}${day}T000000`,
+          `DTSTART;VALUE=DATE:${y}${m}${day}`,
+          `DTEND;VALUE=DATE:${y}${m}${pad(d.getDate()+1)}`,
+          'SUMMARY:Booked — J & A Masterpieces',
+          'END:VEVENT'
+        );
+      }
+      lines.push('END:VCALENDAR');
+
+      const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'jamasterpieces-booked.ics';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      status.textContent = 'Exported .ics with booked dates.';
+    });
+
+    // ====== INIT ======
+    renderDow();
+    render();
+  </script>
+
+	<!-- ______________________________________________________Bottom Menu ______________________________-->
+	<div class="bottommenu">
+		
+				 <img src="image/line.png" alt="line"> <br>
+				<p>Inspired Design. Lasting Impression.</p>
+
+		<footer>
+    <div class="footer-container">
+            <div class="footer-section">
+            <h4>Navigation</h4>
+            <ul>
+				<li><a href="home.html">Home</a></li><br>
+  				<li><a href="products.html">Products</a></li><br>
+				<li><a href="Services.html">Services</a></li><br>
+				<li><a href="About.html">About</a></li><br>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Follow</h4>
+            <ul>
+                <li><a href="https://www.facebook.com/people/J-and-A-Masterpieces-LLC/61577099068316/" target="_blank">Facebook</a></li><br>
+                <li><a href="https://x.com/jamasterpieces" target="_blank">Twitter/X</a></li><br>
+                <li><a href="https://www.instagram.com/jamasterpieces/" target="_blank">Instagram</a></li><br>
+				<li><a href="https://www.youtube.com/@JAMasterpieces" target="_blank">YouTube</a></li><br>
+                <li><a href="#" target="_blank">LinkedIn</a></li><br>
+				</ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+    </div>
+</footer>
+			<div class="footer">
+				<div class="copyright">
+				  &copy; Copyright 2025 | <a href="#">Privacy Policy</a>
+				</div>
+				<div class="atisda">
+					 Designed by <a href="http://www.webdomus.net/">Web Domus Italia - Web Agency </a> 
+				</div>
+			</div>
+	</div>
+
+
+<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>
+<script type="text/javascript" src="source/js/isotope.js"></script>
+<script type="text/javascript" src="source/js/myscript.js"></script> 
+<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.1.11.js"></script>
+<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+
+	</body>
+</html>
