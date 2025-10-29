@@ -183,7 +183,7 @@ body {
 
   <script>
     // Simple password protection
-    const correctPassword = "2025";
+    const correctPassword = "historic";
     const enteredPassword = prompt("Please enter the gallery password:");
     if (enteredPassword !== correctPassword) {
       alert("Incorrect password. Access denied.");
@@ -203,7 +203,7 @@ body {
   const img = document.createElement("img");
   img.src = `images/${filename}`; // thumbnail
   img.alt = filename;
-  img.dataset.fullres = `../../../originals/album8/${filename}`; // point to actual fullres folder
+  img.dataset.fullres = `/photography/originals/album9/${filename}`; // point to actual fullres folder
   gallery.appendChild(img);
 });
 
