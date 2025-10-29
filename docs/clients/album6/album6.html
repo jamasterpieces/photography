@@ -194,7 +194,7 @@ body {
      // Detect album folder (e.g. album8) from URL
   const currentPath = window.location.pathname;
   const albumFolder = currentPath.split("/").slice(-2, -1)[0];
-  const fullResBase = `../../../originals/${albumFolder}`;
+  const fullResBase = `../../../../originals/${albumFolder}`;
   const thumbBase = "images";
 
   const gallery = document.getElementById("gallery");
