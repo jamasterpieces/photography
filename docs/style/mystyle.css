@@ -745,13 +745,12 @@ font-weight: bold;
 .bdots{
 	padding-right: 40px;
 } 
-.row{
-	padding: 0px;
-	margin: 0px;
-
+/* put this back (or just remove your override entirely) */
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+  /* padding isn’t set on .row in BS3; leave it alone */
 }
-
-
 @media screen and (min-width: 320px) and (max-width: 480px){
 	.feturedsection>h1{
 	font-size: 15pt;
@@ -1157,6 +1156,11 @@ padding-left: 0px;
 }
 
 /*-----------------------------------Image Car Thumbnail --------------------------*/
+/* Optional: make disabled preview buttons clearly inactive */
+.btn.disabled[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: .6;
+}
 
 .txtcontent{
 	position: absolute;
@@ -1252,7 +1256,8 @@ padding-left: 0px;
 }
 .txthover>img{
 	width:100%;
-
+	height:auto;
+	display:block;
 }
 .txthover:hover .txtcontent{
 	opacity: 1;
@@ -1804,3 +1809,23 @@ footer {
     .footer-bottom {
         margin-top: 20px;
     }
+/* Uniform gallery tiles */
+.grid .txthover{
+  position: relative;
+  aspect-ratio: 1 / 1;  /* square, very clean uniform look */
+  overflow: hidden;
+  background: #eee;         /* neutral placeholder background */
+}
+
+.grid .txthover img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* crops while keeping composition */
+  display: block;
+}
+
+/* Optional: make disabled placeholder buttons look inactive */
+.btn.disabled{
+  pointer-events: none;
+  opacity: .55;
+}
