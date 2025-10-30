@@ -203,8 +203,8 @@ body {
   const img = document.createElement("img");
   img.src = `images/${filename}`; // thumbnail
   img.alt = filename;
-  const RAW_BASE = 'https://raw.githubusercontent.com/jamasterpieces/photography/main/photography/originals/album9';
-img.dataset.fullres = `${RAW_BASE}/${filename}`;
+  const RAW_BASE = 'https://raw.githubusercontent.com/jamasterpieces/photo-originals/main/originals/album9';
+  img.dataset.fullres = `${RAW_BASE}/${filename}`;
   gallery.appendChild(img);
 });
 
