@@ -1,0 +1,287 @@
+/* Jonathan's Studio — Minimal stylesheet (Bootstrap 3 friendly) */
+
+/* ===== Fonts ===== */
+@font-face{
+  font-family: "BebasNeue Regular";
+  src: url(../source/fonts/BebasNeue-Regular.otf) format("truetype");
+}
+
+/* ===== Layout container ===== */
+.allcontain{
+  max-width: 1366px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1; /* always above background overlay */
+}
+
+/* ===============================
+   Global Dark Background + Faint Lens
+   =============================== */
+body{
+  margin: 0;
+  color: #f5f5f5;
+  background-color: #000;
+  background-image: url("../assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+/* Force readable text on dark background */
+p, li, label, small,
+h1, h2, h3, h4, h5, h6,
+.latestcars, .latestcars h2 {
+  color: #fff !important;
+}
+
+.text-center { color: #fff; } /* your template uses this a lot */
+/* Dark overlay to keep text readable */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.42); /* was 0.68; this reveals the image */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Links */
+/* Global links — readable on dark background */
+a{
+  color: #4da3ff;          /* classic readable blue */
+  text-decoration: underline;
+}
+
+a:visited{
+  color: #9b7dff;          /* classic purple */
+}
+
+a:hover,
+a:focus{
+  color: #79b7ff;
+  text-decoration: underline;
+}
+
+
+/* ===============================
+   Optional Hero Section (use if you wrap top content in .hero)
+   =============================== */
+.hero{
+  padding: 3rem 0; /* reduced from 6rem so it doesn't push everything down */
+}
+
+/* ===== Navbar ===== */
+.topnavbar.navbar-default{
+  background: transparent;
+  border: 0;
+}
+
+/* Make the collapse toggle visible on black */
+.navbar-default .navbar-toggle{
+  border-color: rgba(255,255,255,.35);
+}
+.navbar-default .navbar-toggle .icon-bar{
+  background-color: #fff;
+}
+
+#navbarontop{
+  padding-top: 12px;
+}
+
+#navbarontop > li > a{
+  font-family: "BebasNeue Regular";
+  font-size: 17px;
+  color: #f5f5f5;
+  padding: 6px 10px;
+  margin: 0 18px;
+  border-bottom: 2px solid transparent;
+}
+
+#navbarontop > li > a:hover,
+#navbarontop > li > a:focus{
+  background: none !important;
+  border-bottom-color: #C59E47;
+  outline: none;
+}
+
+/* Center navbar items */
+.navbar-nav {
+  float: none !important;
+  display: inline-block;
+}
+
+.navbar-collapse {
+  text-align: center;
+}
+
+/* Mobile collapse spacing */
+@media (max-width: 767px){
+  #navbarontop{ padding-top: 18px; }
+  #navbarontop > li > a{
+    margin: 0;
+    padding: 10px 18px;
+  }
+}
+
+/* ===== Top intro / hero area (logo left, paragraph right) ===== */
+.js-hero{ margin-top: 10px; }
+
+.js-present{
+  text-align: left;
+  margin: 0 0 12px;
+  font-size: 14px;
+  opacity: .85;
+}
+
+.js-logo{
+  max-width: 460px; /* slightly bigger */
+  width: 100%;
+  height: auto;
+}
+
+.js-intro{
+  text-align: right;
+  max-width: 650px;
+  margin-left: auto;
+  margin-top: 10px;
+  line-height: 1.65;
+}
+
+/* ===== Section headings ===== */
+.latestcars h2{
+  margin-top: 60px;
+  margin-bottom: 30px;
+  letter-spacing: .35em;
+  color: #fff;
+}
+
+/* ===== Gallery grid tiles ===== */
+.grid .txthover{
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #111; /* darker placeholder for dark theme */
+}
+
+.grid .txthover img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover overlay */
+.txtcontent{
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.72);
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+.txthover:hover .txtcontent{ opacity: 1; }
+
+.stars{
+  font-size: 10px;
+  padding: 18px 0 10px;
+  text-align: center;
+  border-bottom: 2px solid rgba(246,246,251,.65);
+  margin: 0 48px;
+  color: #f6f6fb;
+}
+
+.simpletxt{
+  text-align: center;
+  border-top: 1px solid rgba(246,246,251,.65);
+  border-bottom: 1px solid rgba(246,246,251,.65);
+  margin: 8px 48px 0;
+  padding: 18px 0;
+  color: #f6f6fb;
+}
+
+.simpletxt .name{
+  color: #f6f6fb;
+  margin: 0;
+}
+
+/* Disabled preview buttons */
+.btn.disabled[aria-disabled="true"],
+.btn.disabled{
+  pointer-events: none;
+  opacity: .55;
+}
+
+/* ===== Equipment article box (dark-friendly) ===== */
+article{
+  border: 1px solid rgba(255,255,255,.18);
+  padding: 20px;
+  background: rgba(0,0,0,0.28) !important; /* more transparent */
+  color: #fff !important;
+  border-radius: 8px;
+}
+
+/* ===== Footer ===== */
+footer{
+  background: rgba(0,0,0,.75);
+  color: #aaa;
+  padding: 18px 0;
+  text-align: center;
+}
+
+.footer-container{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 12px;
+}
+
+.footer-section{
+  flex: 1;
+  min-width: 160px;
+  max-width: 260px;
+}
+
+.footer-section ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section a{
+  color: #fff;
+}
+
+.footer-section a:hover{
+  text-decoration: underline;
+}
+
+/* Bottom copyright strip */
+.footer{
+  background: rgba(0,0,0,.85);
+  color: #fff;
+  font-size: 12px;
+  width: 100%;
+  padding: 6px 0;
+}
+
+.copyright{
+  text-align: center;
+}
+
+/* ---- Navbar hard override (kills old template offsets) ---- */
+.topnavbar .container{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#navbarontop{
+  padding-left: 0 !important;   /* removes the old 312px shove */
+  float: none !important;
+  display: inline-block !important;
+}
+
+.navbar-collapse{
+  text-align: center !important;
+}
