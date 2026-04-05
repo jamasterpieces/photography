@@ -72,15 +72,6 @@
     max-width:none;
   }
 }
-function toggleSection(id) {
-  const el = document.getElementById(id);
-
-  if (el.classList.contains("active")) {
-    el.classList.remove("active");
-  } else {
-    el.classList.add("active");
-  }
-}
 </style>
 
 </head>
@@ -92,194 +83,182 @@ function toggleSection(id) {
 </div>
 <div class="container text-center">
 <ul class="nav navbar-nav" id="navbarontop">
-  <li><a href="#about">Home</a></li>
-  <li><a href="#sessions-overview">Sessions</a></li>
-  <li><a href="#celebrations">Pricing</a></li>
-  <li><a href="#weddings">Contact</a></li>
-  <li><a href="#galleries">Client Gallery <img src="assets/lock.png" style="max-width: 16px"></a></li>
-  <li><a href="booking.html">Booking</a></li>
+  <li><a href="https://www.jamasterpieces.com/photography">Home</a></li>
+  <li><a href="https://www.jamasterpieces.com/photo-sessions">Sessions</a></li>
+  <li><a href="https://www.jamasterpieces.com/photo-contact">Contact</a></li>
+  <li><a href="https://www.jamasterpieces.com/galleries">Client Gallery <img src="assets/lock.png" style="max-width: 16px"></a></li>
+  <li><a href="https://www.jamasterpieces.com/booking.html">Booking</a></li>
 </ul>
 </div>
 <!-- ________________________TITLE SECTION _______________________-->
 <div class="container js-hero">
   <p class="js-present">
-<img src="assets/logowhite.png" style="max-width: 300px" class="center-block">
-  </p>
-<h2 class="text-center" id="galleries">G A L L E R I E S</h2>
+<img src="assets/hero.png" style="max-width: 800px" class="center-block">
+	  </p>
+
  </div>
 
-<!-- ________________________Latest Image Thumbnail________________-->
-	<div class="latestcars">
-<!-- your gallery grid/cards follow -->
-
+<!-- Top utility row -->
+<div class="container hero-copy">
+  <h3>Capturing the moments you don't want to forget</h3>
+  <p>Weddings, portraits, and family photography in Augusta, GA</p>
+  <a href="#sessions-overview" class="btn-view-sessions">View Sessions</a>
 </div>
-<br>
-<br><br>
-<div class="grid">
-	<div class="row">
 
-		<!-- album 10 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/meeks.jpg" alt="Meeks">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-      </div>
-      <div class="simpletxt">
-        <h3 class="name">Baby Meeks</h3>
-        <br>
-        <a href="clients/album10/album10.html" class="btn btn-primary">Access</a>
-        <br>
-      </div>
+<div class="container sessions-overview" id="sessions-overview">
+  <h2 class="text-center">What We Capture</h2>
+  <div class="session-tiles">
+    <div class="session-tile">
+      <h3>Portraits</h3>
+      <p>Choose from four portrait collections ranging from a simple five-image session to a premium heirloom-focused experience with advanced retouching.</p>
+      <a href="#portraits" class="tile-link">View Portrait Sessions</a>
     </div>
-  </div>
-</div>		
-		
-		<!-- album 9 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/photo225.png" alt="Brandy and Matt">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-      </div>
-      <div class="simpletxt">
-        <h3 class="name">Brandy and Matt</h3>
-        <br>
-        <a href="clients/album9/album9.html" class="btn btn-primary">Access</a>
-        <br>
-      </div>
+    <div class="session-tile">
+      <h3>Celebrations</h3>
+      <p>Coverage for birthdays, anniversaries, graduations, and family milestones with candid moments, detail shots, and portraits of the people who matter most.</p>
+      <a href="#celebrations" class="tile-link">View Celebration Coverage</a>
+    </div>
+    <div class="session-tile">
+      <h3>Weddings</h3>
+      <p>From courthouse elopements to full-day coverage, wedding collections are built to tell the story of your day with edited images and online delivery.</p>
+      <a href="#weddings" class="tile-link">View Wedding Collections</a>
     </div>
   </div>
 </div>
+<!-- TILE -->
+<div class="latestcars">
+  <h2 class="text-center" id="portraits">P O R T R A I T S</h2>
 
-<!-- album 8 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/GACA.png" alt="Greater Augusta Christian Academy 2025">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
+  <div class="portrait-tiles grid-2x2">
+
+    <!-- GLIMPSE -->
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('glimpse')">
+        The Glimpse - $75
       </div>
-      <div class="simpletxt">
-        <h3 class="name">Greater Augusta Christian Academy 2025</h3>
-        <br>
-        <a href="clients/album8/album8.html" class="btn btn-primary">Access</a>
-        <br>
+      <div id="glimpse" class="tile-content">
+        5 fully edited images<br>
+        All images receive professional color + light correction<br>
+        No additional retouching included
       </div>
     </div>
+
+    <!-- CHAPTER -->
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('chapter')">
+        The Chapter - $125
+      </div>
+      <div id="chapter" class="tile-content">
+        10 fully edited images<br>
+        2 images with minor retouching (client’s choice)<br>
+        Minor retouching = blemish removal, light skin smoothing, flyaway cleanup
+      </div>
+    </div>
+
+    <!-- LEGACY -->
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('legacy')">
+        The Legacy - $175
+      </div>
+      <div id="legacy" class="tile-content">
+        15 fully edited images<br>
+        3 images with minor retouching<br>
+        1 image with full retouching<br>
+        Full retouching = advanced edits (skin balancing, background cleanup, clothing fixes)
+      </div>
+    </div>
+
+    <!-- MASTERPIECE -->
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('masterpiece')">
+        The Masterpiece - $250
+      </div>
+      <div id="masterpiece" class="tile-content">
+        25 fully edited images<br>
+        5 images with minor retouching<br>
+        2 images with full retouching<br>
+        Premium option, ideal for wall art and heirloom portraits
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- album 7 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/photo110.jpg" alt="Siera">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-      </div>
-      <div class="simpletxt">
-        <h3 class="name">Siera</h3>
-        <br>
-        <a href="clients/album7/album7.html" class="btn btn-primary">Access</a>
-        <br>
-      </div>
-    </div>
-  </div>
 </div>
 
-<!-- album 6 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/oliviaandjohnathan.jpg" alt="Olivia and Johnathan">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
+<div class="latestcars">
+  <h2 class="text-center" id="weddings">W E D D I N G S</h2>
+
+  <div class="portrait-tiles grid-2x2">
+
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('elopement')">
+        Elopement Package - $300
       </div>
-      <div class="simpletxt">
-        <h3 class="name">Olivia and Johnathan</h3>
-        <br>
-        <a href="clients/album6/album6.html" class="btn btn-primary">Access</a>
-        <br>
+      <div id="elopement" class="tile-content">
+        Coverage: Up to 2 hours<br>
+        Ideal for courthouse weddings or small ceremonies<br>
+        75+ professionally edited digital photos<br>
+        Private online gallery for download<br>
+        Delivery within 2 weeks
       </div>
     </div>
-  </div>
-</div>
 
-<!-- album 5 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/brandyandmatt.jpg" alt="Brandy and Matt">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('halfday')">
+        Half-Day Coverage - $600
       </div>
-      <div class="simpletxt">
-        <h3 class="name">Brandy and Matt</h3>
-        <br>
-        <a href="clients/album5/album5.html" class="btn btn-primary">Access</a>
-        <br>
+      <div id="halfday" class="tile-content">
+        Coverage: Up to 4 hours<br>
+        Great for ceremony + portraits or partial reception<br>
+        150+ edited digital photos<br>
+        Online gallery with high-resolution downloads<br>
+        Basic color correction and light retouching<br>
+        Delivery within 3 weeks
       </div>
     </div>
-  </div>
-</div>
 
-<!-- album 4 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/samsquared.jpg" alt="Sam Squared">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('fullday')">
+        Full-Day Essentials - $1,000
       </div>
-      <div class="simpletxt">
-        <h3 class="name">Sam Squared</h3>
-        <br>
-        <a href="clients/album4/album4.html" class="btn btn-primary">Access</a>
-        <br>
+      <div id="fullday" class="tile-content">
+        Coverage: Up to 8 hours<br>
+        Covers prep, ceremony, portraits, and reception<br>
+        300+ edited digital photos<br>
+        Online gallery with high-resolution downloads<br>
+        Delivery within 4 weeks
       </div>
     </div>
-  </div>
-</div>
 
-<!-- album 3 -->
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-  <div class="txthover">
-    <img src="photography/Brandy.jpg" alt="Brandy's Graduation">
-    <div class="txtcontent">
-      <div class="stars">
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
-        <div class="glyphicon glyphicon-star"></div>
+    <div class="portrait-tile">
+      <div class="tile-header" onclick="toggleSection('fulldayengagement')">
+        Full-Day + Engagement Session - $1,200
       </div>
-      <div class="simpletxt">
-        <h3 class="name">Brandy's Graduation</h3>
-        <br>
-        <a href="clients/album3/album3.html" class="btn btn-primary">Access</a>
-        <br>
+      <div id="fulldayengagement" class="tile-content">
+        Includes everything in the Full-Day Essentials package<br>
+        1-hour engagement session on separate date (50+ images)<br>
+        Two outfit changes for engagement session<br>
+        Delivery: Engagement photos in 1 week, wedding photos in 4 weeks
       </div>
     </div>
-  </div>
-</div>
-
 	</div>
+    <div class="portrait-tiles">
+      <div class="tile-header" onclick="toggleSection('weddingaddons')">
+        Add-Ons
+      </div>
+      <div id="weddingaddons" class="tile-content">
+        Extra hour: $100/hr<br>
+        Second shooter if available: $200 (half-day), $400 (full-day)<br>
+        USB drive: $25<br>
+        Rush delivery within 5 days: $150<br>
+        Additional travel costs may apply outside the CSRA
+      </div>
+    </div>
+
 </div>
+<!-- ________________________Latest Image Thumbnail________________-->
+
 	<!-- ______________________________________________________Bottom Menu ______________________________-->
 	<div class="bottommenu">
 		
@@ -381,6 +360,15 @@ function toggleSection(id) {
   backdrop.addEventListener('click', closeModal);
   window.addEventListener('load', openModal);
 })();
+</script>
+<script>window.toggleSection = function(id) {
+  const el = document.getElementById(id);
+  if (!el) {
+    console.log("Element not found:", id);
+    return;
+  }
+  el.classList.toggle("active");
+};
 </script>
 <!-- /Maintenance Modal -->
 	</body>
