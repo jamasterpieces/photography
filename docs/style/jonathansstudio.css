@@ -212,6 +212,14 @@ a:focus{
   opacity: .55;
 }
 
+.tile-content {
+  display: none;
+}
+
+.tile-content.active {
+  display: block;
+}
+
 /* ===== Equipment article box (dark-friendly) ===== */
 article{
   border: 1px solid rgba(255,255,255,.18);
@@ -410,4 +418,71 @@ footer{
     text-align: center;
     gap: 2rem;
   }
+}
+
+.portrait-tiles {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.portrait-tiles.grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.portrait-tile {
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 6px;
+  overflow: hidden;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+background-size: cover;
+background-repeat: no-repeat;
+color: #fff;
+}
+
+.tile-header {
+  padding: 15px;
+  cursor: pointer;
+  background: rgba(255,255,255,.05);
+  font-weight: bold;
+  text-align: center;
+}
+
+.tile-header:hover {
+  background: rgba(255,255,255,.1);
+}
+
+.tile-content {
+  display: none;
+  padding: 15px;
+  text-align: center;
+}
+
+.tile-content.active {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .portrait-tiles.grid-2x2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portrait-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+.tile-header,
+.tile-content {
+  position: relative;
+  z-index: 2;
 }
