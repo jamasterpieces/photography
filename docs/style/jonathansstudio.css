@@ -31,8 +31,16 @@ body{
 /* Force readable text on dark background */
 p, li, label, small,
 h1, h2, h3, h4, h5, h6,
-.latestcars, .latestcars h2 {
+.latestcars {
   color: #fff !important;
+  margin-bottom: 80px;
+}
+
+.latestcars h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  letter-spacing: 0.3em;
+  font-size: 18px;
 }
 
 .text-center { color: #fff; } /* your template uses this a lot */
@@ -445,6 +453,13 @@ background-repeat: no-repeat;
 color: #fff;
 }
 
+.portrait-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .tile-header {
   padding: 15px;
   cursor: pointer;
@@ -473,16 +488,27 @@ color: #fff;
   }
 }
 
-.portrait-tile::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1;
-}
 
 .tile-header,
 .tile-content {
   position: relative;
   z-index: 2;
+}
+
+.sessions-title {
+  margin-bottom: 20px;
+}
+
+.sessions-strip {
+  max-width: 1100px;
+  margin: 30px auto 60px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.portrait-tile:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.4);
 }
